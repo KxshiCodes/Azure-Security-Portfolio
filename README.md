@@ -1,3 +1,5 @@
+[🇬🇧 English](README.md) | [🇫🇷 Français](README.fr.md)
+
 # Azure Security Portfolio <img src="https://img.shields.io/badge/Status-Completed-green" />
 
 A hands-on Azure security portfolio focused on cloud security fundamentals, identity protection, threat detection, monitoring, and incident response.
