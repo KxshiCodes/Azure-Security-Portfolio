@@ -1,94 +1,56 @@
-[🇬🇧 English](README.md) | [🇫🇷 Français](README.fr.md)
+# Azure Security Portfolio
 
-# Azure Security Portfolio <img src="https://img.shields.io/badge/Status-Completed-green" />
+A hands-on Azure security portfolio covering cloud infrastructure, identity and access management, network security, threat detection, and incident response.
 
-A hands-on Azure security portfolio focused on cloud security fundamentals, identity protection, threat detection, monitoring, and incident response.
+Practical implementations using Microsoft Azure security services, with a focus on securing resources, analysing security events, detecting threats, and investigating incidents.
 
-This repository documents practical security projects designed to demonstrate the skills expected of a SOC Analyst or Azure Cloud Security Analyst, including securing Azure resources, analysing security events, investigating threats, and improving cloud security posture.
+## Projects
 
----
+### 1. Azure Foundation
 
-# Portfolio Objectives
-
-This portfolio focuses on:
-
-- Building practical Azure security experience
-- Understanding core Azure security concepts and services
-- Implementing identity and access security controls
-- Deploying security monitoring and detection capabilities
-- Investigating security incidents using Microsoft security tools
-- Documenting security decisions, findings, and lessons learned
-
----
-
-# Portfolio Structure
-
-The projects follow the lifecycle of securing and monitoring an Azure environment:
-
-Azure Foundation → Identity Security → Network Security → Security Monitoring & Threat Detection → Attack Simulation → Incident Response
-
----
-
-# Projects
-
-## 1. Azure Foundation
-
-Establishing the core Azure environment required for security monitoring and investigation.
-
-Focus areas:
+Deployment and configuration of the core Azure environment.
 
 - Azure resource configuration
-- Log Analytics
+- Log Analytics Workspace
 - Microsoft Sentinel deployment
 - Security telemetry collection
-- KQL validation
+- KQL queries and validation
 
+### 2. Identity Security
 
-## 2. Identity Security
+Identity and access management using Microsoft Entra ID.
 
-Securing Azure identities and access using Microsoft Entra ID and Azure Role-Based Access Control (RBAC).
-
-Focus Areas:
-
-- RBAC and least-privilege access
-- Identity and access management
-- Authentication and MFA
+- Role-Based Access Control (RBAC)
+- Least-privilege access
+- Multi-factor authentication (MFA)
 - Conditional Access
 - Identity Protection
-- Privileged access
+- Privileged access management
 - Zero Trust principles
 
+### 3. Network Security
 
-## 3. Network Security
-
-Implementing Azure networking security controls.
-
-Focus areas:
+Configuration of Azure network security controls.
 
 - Network segmentation
-- Network Security Groups
+- Network Security Groups (NSGs)
 - Azure Firewall
 - Secure connectivity
 
+### 4. Security Monitoring & Threat Detection
 
-## 4. Security Monitoring & Threat Detection
-
-Building security visibility and detection capabilities.
-
-Focus areas:
+Security monitoring, log analysis, and threat detection.
 
 - Microsoft Sentinel
 - Microsoft Defender
 - Security alerts
 - Log analysis
 - Detection engineering
+- KQL queries
 
+### 5. Attack Simulation
 
-## 5. Attack Simulation
-
-Performing controlled attack scenarios to understand attacker behaviour and validate security controls.
-
-Focus areas:
+Controlled attack scenarios to understand attacker behaviour and validate security controls.
 
 - Credential access
 - Execution techniques
@@ -96,22 +58,17 @@ Focus areas:
 - Defence evasion
 - Lateral movement
 
+### 6. Incident Response
 
-## 6. Incident Response
-
-Investigating security incidents using a SOC workflow.
-
-Focus areas:
+Security incident investigation following a SOC workflow.
 
 - Alert triage
-- Investigation
-- IOC analysis
+- Incident investigation
+- Indicator of Compromise (IOC) analysis
 - Incident documentation
 - Response recommendations
 
----
-
-# Technologies Used
+## Technologies
 
 - Microsoft Azure
 - Microsoft Entra ID
@@ -120,13 +77,5 @@ Focus areas:
 - Microsoft Defender for Office 365
 - Azure Monitor
 - Log Analytics Workspace
-- KQL
+- Kusto Query Language (KQL)
 - PowerShell
-
----
-
-# Goal
-
-The goal of this portfolio is to demonstrate practical Azure security knowledge through hands-on implementation, investigation, and documentation.
-
-Each project focuses on understanding not only **how** security controls are configured, but also **why** they are implemented and how they support real-world cloud security operations.
