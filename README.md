@@ -1,64 +1,85 @@
 # Azure Security Portfolio
 
-Hands-on security projects focused on securing, monitoring, and investigating Microsoft Azure environments.
+A hands-on portfolio documenting practical security projects built within Microsoft Azure.
 
-This portfolio documents practical work across cloud security, identity and access management, network security, threat detection, attack simulation, and incident response.
+The projects cover cloud infrastructure, identity and access management, network security, security monitoring, attack simulation, and incident response, with a focus on implementing security controls, analysing telemetry, and investigating suspicious activity.
 
 ## Projects
 
 ### 01. Azure Foundation
-Deployment of the Azure environment and core security infrastructure.
 
-- Resource configuration
+Built the foundational Azure environment used throughout the portfolio.
+
+- Azure resource deployment
 - Log Analytics Workspace
-- Microsoft Sentinel deployment
-- Security log collection and validation
-- KQL queries
+- Microsoft Sentinel integration
+- Windows security telemetry
+- KQL log validation
+
+[View Project](./1-Azure-Foundation/)
 
 ### 02. Identity Security
-Securing identities, access, and authentication in Microsoft Entra ID.
 
+Implemented identity management and access controls using Microsoft Entra ID and Azure RBAC.
+
+- User and group administration
 - Role-Based Access Control (RBAC)
 - Least-privilege access
-- Multi-Factor Authentication (MFA)
-- Conditional Access
-- Identity Protection
-- Privileged access management
+- Authentication and identity protection concepts
+- Privileged access management concepts
+
+[View Projects](./2-Identity-Security/)
 
 ### 03. Network Security
-Implementing network security controls within Azure.
 
+Configured layered network security controls to restrict access and manage traffic across Azure workloads.
+
+- Virtual Networks and subnet segmentation
 - Network Security Groups (NSGs)
-- Network segmentation
+- Application Security Groups (ASGs)
 - Azure Firewall
-- Secure network connectivity
+- Routing and traffic filtering
+- Connectivity and firewall validation
 
-### 04. Security Monitoring & Threat Detection
-Monitoring security activity and identifying potential threats.
+[View Project](./3-Network-Security/)
 
-- Microsoft Sentinel
-- Microsoft Defender
-- Security alert investigation
-- Log analysis
-- KQL-based detection
+### 04. Security Monitoring
+
+Investigated security alerts and suspicious authentication activity using Microsoft Sentinel.
+
+- Incident triage
+- Authentication log analysis
+- KQL investigation
+- Entity and IOC analysis
+- Incident escalation
+
+[View Project](./4-Security-Monitoring/)
 
 ### 05. Attack Simulation
-Controlled attack simulations to assess security controls and investigate attacker activity.
 
-- Credential access
+Investigated controlled attack simulations using Microsoft Defender XDR to understand attacker behaviour and validate security detections.
+
 - Execution
+- Credential access
 - Privilege escalation
 - Defence evasion
-- Lateral movement
+- Lateral movement and discovery activity
+- MITRE ATT&CK mapping
+- Advanced Hunting
+
+[View Project](./5-Attack-Simulation/)
 
 ### 06. Incident Response
-Investigating security incidents, assessing impact, and documenting findings.
 
-- Alert triage
-- Incident investigation
-- Indicator of Compromise (IOC) analysis
-- Identity activity investigation
-- Incident reporting
+Investigated a simulated phishing incident, assessing malicious indicators and potential identity compromise.
+
+- Phishing email analysis
+- Email authentication investigation
+- IOC identification
+- Entra ID sign-in analysis
+- Incident assessment and documentation
+
+[View Project](./6-Incident-Response/)
 
 ## Technologies
 
@@ -67,7 +88,13 @@ Investigating security incidents, assessing impact, and documenting findings.
 - Microsoft Sentinel
 - Microsoft Defender for Cloud
 - Microsoft Defender for Office 365
+- Microsoft Defender XDR
 - Azure Monitor
 - Log Analytics Workspace
 - Kusto Query Language (KQL)
-- PowerShell
+- Azure PowerShell
+- Azure CLI
+
+---
+
+**Note:** Projects include hands-on Azure implementations, controlled security simulations, and simulated incident investigations. All scenarios are documented with their respective scope and context.
