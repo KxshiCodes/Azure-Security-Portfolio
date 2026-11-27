@@ -11,13 +11,6 @@ Investigated a phishing email impersonating a legitimate payment service provide
 **Status:** Resolved  
 **Outcome:** No confirmed account compromise
 
-## Tools & Technologies
-
-- Microsoft Sentinel
-- Microsoft Defender for Office 365
-- Microsoft Entra ID
-- Azure Monitor
-
 ## Investigation
 
 The investigation followed a structured incident response workflow:
