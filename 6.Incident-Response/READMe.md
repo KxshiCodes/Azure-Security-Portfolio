@@ -1,41 +1,48 @@
 # Phishing Incident Investigation
 
-A simulated SOC incident investigation focused on identifying a phishing attempt, analysing indicators of compromise (IOCs), and assessing potential identity compromise within a Microsoft Azure security environment.
+Investigated a simulated phishing attempt impersonating a legitimate payment service provider, focusing on email analysis, indicators of compromise, and potential identity compromise.
 
-## Overview
+## Incident Details
 
-Investigated a phishing email impersonating a legitimate payment service provider. The investigation aimed to determine whether the email was malicious, whether credentials were potentially exposed, and whether any subsequent suspicious identity activity occurred.
-
-**Incident classification:** Phishing  
-**Severity:** Medium  
-**Status:** Resolved  
-**Outcome:** No confirmed account compromise
+| Field | Details |
+|---|---|
+| Incident Type | Phishing |
+| Severity | Medium |
+| Status | Resolved |
+| Outcome | No confirmed account compromise |
 
 ## Investigation
 
-The investigation followed a structured incident response workflow:
+### Email Analysis
 
-- **Email Analysis:** Reviewed sender details, email headers, SPF/DKIM/DMARC results, suspicious domains, and embedded URLs.
-- **IOC Investigation:** Identified and assessed indicators associated with the suspected phishing infrastructure.
-- **Identity Investigation:** Reviewed Entra ID sign-in activity for suspicious authentication attempts and potential credential misuse.
-- **Impact Assessment:** Correlated available security evidence to determine whether the phishing attempt resulted in further malicious activity.
+Reviewed sender information, email headers, SPF/DKIM/DMARC authentication results, sender domains, and embedded URLs to assess the legitimacy of the reported email.
+
+### IOC Investigation
+
+Identified a lookalike domain impersonating a legitimate service and a suspicious URL directing users to a fake login page.
+
+### Identity Investigation
+
+Reviewed Microsoft Entra ID sign-in activity to identify suspicious authentication attempts and potential credential misuse.
+
+### Impact Assessment
+
+Correlated available email and identity telemetry to determine whether the phishing attempt resulted in credential exposure or further suspicious activity.
 
 ## Key Findings
 
-- Identified a lookalike domain impersonating a legitimate service.
-- Identified suspicious email authentication results and a link directing users to a fake login page.
-- Reviewed available identity telemetry for signs of credential compromise.
-- Found no evidence of successful authentication or subsequent suspicious activity.
+- Identified a lookalike phishing domain.
+- Identified suspicious email authentication results.
+- Identified a URL directing users to a fake authentication page.
+- Found no evidence of successful authentication or subsequent suspicious identity activity.
 
 ## Incident Outcome
 
-The investigation concluded that the phishing attempt was unsuccessful, with no confirmed credential compromise, malware execution, or further malicious activity identified in the available evidence.
+The investigation concluded that the phishing attempt was unsuccessful.
 
-Recommended response measures included blocking identified indicators, strengthening email authentication controls, improving phishing detection, and monitoring identity activity.
+No evidence of credential compromise, malware execution, or further malicious activity was identified in the available telemetry.
 
-## Key Skills Demonstrated
-
-Phishing Analysis · IOC Investigation · Email Authentication · Microsoft Sentinel · Entra ID Sign-in Analysis · Incident Response · Security Event Correlation
+Recommended response measures included blocking identified indicators, strengthening email authentication controls, and improving phishing detection and identity monitoring.
 
 ---
 
