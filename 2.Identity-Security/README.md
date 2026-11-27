@@ -1,42 +1,17 @@
 # Identity Security
 
-## Overview
-
-This section focuses on securing identities and access within Microsoft Azure using Microsoft Entra ID and Azure Role-Based Access Control (RBAC).
-
-The projects demonstrate practical identity security concepts relevant to cloud security and SOC operations, with a focus on least privilege, authentication, access control, and protection of privileged identities.
-
----
+Projects focused on securing identities, managing access, and protecting privileged accounts within Microsoft Azure and Microsoft Entra ID.
 
 ## Projects
 
-### 1. RBAC & Least Privilege
+### 01. RBAC & Least Privilege
 
-Hands-on implementation of Microsoft Entra ID security groups and Azure RBAC to apply role-based access and least-privilege principles.
+Implemented role-based access controls using Entra ID security groups and Azure RBAC, applying least-privilege access across Azure resources.
 
-[View Project](RBAC-Least-Privilege)
+[View Project](RBAC-Least-Privilege/)
 
-### 2. Entra ID Security
+### 02. Entra ID Security
 
-Focused study of Microsoft Entra ID identity and access security, including authentication, MFA, Conditional Access, Identity Protection, PIM, and Zero Trust.
+Explored identity security controls within Microsoft Entra ID, covering authentication, MFA, Conditional Access, Identity Protection, and Privileged Identity Management (PIM).
 
-[View Project](Entra-ID-Security)
-
----
-
-## Security Focus
-
-- Identity and access management
-- Least privilege
-- Role-Based Access Control
-- Authentication and MFA
-- Conditional Access
-- Identity protection
-- Privileged access
-- Zero Trust principles
-
----
-
-## Key Learning
-
-Identity is a critical part of cloud security. Understanding how identities are authenticated, authorised, monitored, and protected is essential for reducing unauthorised access and investigating identity-based security threats.
+[View Project](Entra-ID-Security/)
