@@ -30,18 +30,6 @@ This project focuses on:
 
 ---
 
-## Technologies Used
-
-- Microsoft Defender XDR
-- Microsoft Defender for Cloud
-- Microsoft Sentinel
-- Microsoft Entra ID
-- Azure Virtual Machines
-- Windows Security Logs
-- MITRE ATT&CK Framework
-
----
-
 ## Microsoft Defender XDR Foundation
 
 Before conducting the attack simulations, I developed a foundational understanding of Microsoft Defender XDR and how it supports security operations.
