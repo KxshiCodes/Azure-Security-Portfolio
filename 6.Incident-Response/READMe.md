@@ -1,4 +1,3 @@
-
 # Phishing Incident Investigation
 
 A simulated SOC incident investigation focused on identifying a phishing attempt, analysing indicators of compromise (IOCs), and assessing potential identity compromise within a Microsoft Azure security environment.
