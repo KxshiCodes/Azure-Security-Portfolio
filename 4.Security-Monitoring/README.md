@@ -1,191 +1,77 @@
 # Microsoft Sentinel Alert Investigation
 
-## Overview
+Investigated a Microsoft Sentinel security incident involving repeated authentication attempts against disabled user accounts from an external IP address.
 
-This project demonstrates how Microsoft Sentinel is used within a SOC environment to investigate security alerts, analyse suspicious activity, and support incident triage.
+The investigation focused on analysing authentication activity, validating alert evidence, assessing potential risk, and documenting findings for escalation.
 
-The investigation focuses on reviewing security alerts, analysing authentication activity, correlating events using Log Analytics and KQL, identifying indicators of compromise (IOCs), and documenting findings for escalation.
+## Incident Details
 
----
+| Field | Details |
+|---|---|
+| Incident Type | Suspicious Authentication Activity |
+| Severity | Medium |
+| Status | Escalated |
+| Detection Source | Microsoft Sentinel |
+| MITRE ATT&CK | As mapped in Sentinel |
 
-## Scenario
+## Investigation
 
-Microsoft Sentinel generated a **medium-severity security incident** after detecting repeated sign-in attempts from an external IP address targeting disabled user accounts.
+### 01. Incident Triage
 
-The objective of the investigation was to determine:
-
-- Whether the activity represented a genuine security concern
-- The scope and impact of the activity
-- The affected users and resources
-- Whether further investigation or escalation was required
-
----
-
-## Azure Services Used
-
-- **Microsoft Sentinel (SIEM)**  
-  Security alert monitoring, incident investigation, entity analysis, and threat detection.
-
-- **Log Analytics Workspace**  
-  Centralised collection and analysis of security telemetry.
-
-- **Microsoft Entra ID**  
-  Identity and authentication log analysis.
-
-- **Azure Monitor**  
-  Monitoring and visibility into Azure activity.
-
----
-
-# Investigation Workflow
-
-The investigation followed a typical SOC analyst process:
-
-Alert Generated → Initial Alert Triage → Review Incident Details & Entities → Analyse Authentication Logs → Identify Indicators of Compromise → Assess Severity & Impact → Escalate Findings
-
----
-
-# Investigation Summary
-
-I assumed ownership of a Microsoft Sentinel incident titled:
-
-**"Sign-ins from IPs that attempt sign-ins to disabled accounts"**
-
-The incident contained multiple authentication attempts targeting disabled user accounts from an external IP address.
-
-The initial objective was to determine whether this activity represented:
-
-- Automated scanning
-- Credential attack activity
-- Malicious authentication attempts
-- False positive behaviour
-
----
-
-# Investigation Process
-
-## 1. Incident Review and Initial Triage
-
-The incident details were reviewed to understand the alert context, including:
-
-- Incident severity
-- Associated alerts
-- Affected entities
-- Event timestamps
-- MITRE ATT&CK mappings
-
-This provided an overview of why the alert was triggered and identified the areas requiring further investigation.
+Reviewed the Sentinel incident to establish the alert context, severity, affected entities, associated alerts, and MITRE ATT&CK mappings.
 
 ![Incident Overview](screenshots/incident-overview.png)
 
 ![Incident Details](screenshots/incident-details.png)
 
----
+### 02. Timeline Analysis
 
-## 2. Timeline and Activity Analysis
+Reviewed the incident timeline to understand the sequence and frequency of authentication attempts.
 
-The incident timeline was analysed to understand the sequence and frequency of authentication events.
+Focused on source IP activity, targeted accounts, event timestamps, and authentication results.
 
-The investigation focused on:
+![Incident Timeline](screenshots/incident-timeline.png)
 
-- Source IP address activity
-- Targeted user accounts
-- Authentication attempts
-- Event timing and patterns
+### 03. Authentication Log Analysis
 
-This helped determine whether the activity aligned with normal behaviour or required further investigation.
+Pivoted into Log Analytics to investigate the underlying authentication events using KQL.
 
-![Incident Timeline Analysis](screenshots/incident-timeline.png)
-
----
-
-## 3. Log Investigation Using Log Analytics
-
-To validate the alert, I pivoted into Log Analytics and reviewed the underlying authentication data.
-
-The investigation focused on:
-
-- Source IP address
-- Target user accounts
-- Authentication results
-- Related sign-in activity
-
-KQL queries were used to review available telemetry and confirm the activity observed within Microsoft Sentinel.
+Reviewed source IP addresses, targeted accounts, authentication results, and related sign-in activity to validate the Sentinel alert.
 
 ![Log Analytics Query Results](screenshots/laq.png)
 
----
+### 04. Entity Investigation
 
-## 4. Entity Investigation
+Investigated the associated IP address and affected user accounts to gather additional context.
 
-The associated entities were investigated, including the suspicious IP address and affected user accounts.
-
-Additional context was gathered through:
-
-- IP information
-- Geolocation data
-- Account details
-- Related authentication activity
-
-This helped assess whether the activity matched expected behaviour or represented suspicious access attempts.
+Reviewed available IP information, geolocation data, account details, and related authentication activity.
 
 ![Entity Investigation](screenshots/entity-investigation.png)
 
 ![IP Details](screenshots/ip-analysis.png)
 
----
+## Key Findings
 
-## 5. Investigation Outcome
+| Indicator | Finding |
+|---|---|
+| Source IP | 175.45.176.99 |
+| Target Accounts | Disabled user accounts |
+| Authentication Activity | Multiple failed sign-in attempts |
+| Detection | Sign-ins from IPs attempting authentication to disabled accounts |
 
-After correlating evidence from:
+The activity was considered suspicious and required further investigation to establish its scope and potential impact.
 
-- Microsoft Sentinel alerts
-- Microsoft Entra ID sign-in logs
-- Entity information
-- Authentication events
+## Incident Outcome
 
-The activity was determined to require further investigation.
+The investigation was documented and an escalation task was created for the SOC Level 2 team.
 
-Findings were documented, an escalation task was created, and the incident was assigned to the SOC Level 2 team for additional threat hunting and analysis.
+The escalation included the identified indicators, affected accounts, authentication activity, and supporting investigation evidence for further threat hunting.
 
-![Escalation Task / Incident Assignment to SOC Level 2](screenshots/escalation-task.png)
+![SOC Level 2 Escalation](screenshots/escalation-task.png)
 
----
+## Recommendations
 
-# Key Findings (IOCs & Evidence)
-
-| IOC Type | Evidence | Relevance |
-|-----------|-----------|-----------|
-| Source IP Address | 175.45.176.99 | Generated multiple authentication attempts |
-| User Account | Disabled account(s) | Targeted during suspicious sign-in activity |
-| Alert Name | Sign-ins from IPs that attempt sign-ins to disabled accounts | Detection source that initiated investigation |
-| Authentication Events | Multiple failed sign-in attempts | Indicated suspicious authentication behaviour |
-| Geolocation Data | External location | Provided additional context during investigation |
-
----
-
-# Security Recommendations
-
-Based on the investigation findings, the following improvements were recommended:
-
-- Continue monitoring authentication activity associated with the identified IP address.
-- Perform additional threat hunting to identify similar authentication attempts across the environment.
-- Review monitoring coverage for suspicious authentication activity.
-- Enrich authentication alerts with threat intelligence and IP reputation data.
-- Regularly review and tune detection rules to improve alert accuracy.
-
----
-
-# Key Learnings
-
-Through this investigation, I developed practical experience with:
-
-- Microsoft Sentinel incident investigation
-- SOC alert triage workflows
-- Authentication log analysis
-- KQL-based investigation techniques
-- Entity and IOC investigation
-- MITRE ATT&CK mapping
-- Security incident escalation processes
-
-This project demonstrated how Microsoft Sentinel can provide visibility into cloud identity activity and support analysts in detecting, investigating, and escalating suspicious behaviour within an Azure environment.
+- Continue monitoring authentication attempts associated with the identified IP.
+- Investigate related activity across other user accounts.
+- Review detection coverage for suspicious authentication patterns.
+- Enrich alerts with threat intelligence and IP reputation data.
