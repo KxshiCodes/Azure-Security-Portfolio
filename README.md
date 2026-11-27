@@ -16,7 +16,7 @@ Built the foundational Azure environment used throughout the portfolio.
 - Windows security telemetry
 - KQL log validation
 
-[View Project](./1-Azure-Foundation/)
+[View Project](./1.Azure-Foundation/)
 
 ### 02. Identity Security
 
@@ -28,7 +28,7 @@ Implemented identity management and access controls using Microsoft Entra ID and
 - Authentication and identity protection concepts
 - Privileged access management concepts
 
-[View Projects](./2-Identity-Security/)
+[View Projects](./2.Identity-Security/)
 
 ### 03. Network Security
 
@@ -41,7 +41,7 @@ Configured layered network security controls to restrict access and manage traff
 - Routing and traffic filtering
 - Connectivity and firewall validation
 
-[View Project](./3-Network-Security/)
+[View Project](./3.Network-Security/)
 
 ### 04. Security Monitoring
 
@@ -53,7 +53,7 @@ Investigated security alerts and suspicious authentication activity using Micros
 - Entity and IOC analysis
 - Incident escalation
 
-[View Project](./4-Security-Monitoring/)
+[View Project](./4.Security-Monitoring/)
 
 ### 05. Attack Simulation
 
@@ -67,7 +67,7 @@ Investigated controlled attack simulations using Microsoft Defender XDR to under
 - MITRE ATT&CK mapping
 - Advanced Hunting
 
-[View Project](./5-Attack-Simulation/)
+[View Project](./5.Attack-Simulation/)
 
 ### 06. Incident Response
 
@@ -79,7 +79,7 @@ Investigated a simulated phishing incident, assessing malicious indicators and p
 - Entra ID sign-in analysis
 - Incident assessment and documentation
 
-[View Project](./6-Incident-Response/)
+[View Project](./6.Incident-Response/)
 
 ## Technologies
 
