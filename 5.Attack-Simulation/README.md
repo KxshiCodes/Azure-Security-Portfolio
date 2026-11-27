@@ -1,334 +1,131 @@
 # Attack Simulation & Security Validation
 
-## Overview
+Controlled attack simulations investigated from a defensive security perspective using Microsoft Defender XDR.
 
-This project explores how Microsoft Defender security tools can be used to detect, investigate, and validate security controls through controlled attack simulations.
+The project examines how common attacker techniques generate endpoint telemetry, how Defender identifies suspicious activity, and how security alerts can be investigated using process activity, incident timelines, and Advanced Hunting.
 
-The purpose of these simulations is to understand common attacker techniques from a defensive security perspective, analyse the telemetry generated during malicious activity, and evaluate how Microsoft security solutions identify and respond to threats.
+## Investigation Overview
 
-The project focuses on the relationship between attacker behaviour and defensive visibility, helping develop practical skills in:
+Five attack scenarios were investigated across different MITRE ATT&CK tactics.
 
-- Threat detection
-- Security investigation
-- Alert analysis
-- MITRE ATT&CK mapping
-- Security control validation
+| Scenario | Defender Detection | Severity |
+|---|---|---|
+| Execution | Suspicious script content observed | Medium |
+| Credential Access | Suspicious account and device activity | As reported |
+| Privilege Escalation | UAC bypass detected | Medium |
+| Defence Evasion | Attempt to disable Defender Antivirus | High |
+| Lateral Movement | Compromised account conducting hands-on-keyboard attack | High |
 
----
+## Attack Simulations
 
-## Objectives
+### 01. Execution
 
-This project focuses on:
+Investigated suspicious script execution detected on a Windows 11 device.
 
-- Understanding common attacker techniques used against enterprise environments
-- Learning how attacker activity appears from a defender's perspective
-- Using Microsoft Defender security tools to analyse suspicious behaviour
-- Reviewing security alerts and investigation data
-- Mapping simulated activity to MITRE ATT&CK techniques
-- Developing practical threat detection and response skills
-- Identifying opportunities to improve security controls
+Microsoft Defender XDR generated a medium-severity alert: **"A script with suspicious content was observed."**
 
----
+The investigation covered the affected device, user account, process activity, and command-line information.
 
-## Microsoft Defender XDR Foundation
-
-Before conducting the attack simulations, I developed a foundational understanding of Microsoft Defender XDR and how it supports security operations.
-
-The focus was on understanding how Defender XDR brings security signals together across Microsoft security products to provide a centralised view of threats, incidents, users, and devices.
-
-I also reviewed:
-
-- Defender XDR architecture and security signal integration
-- Unified Role-Based Access Control (RBAC)
-- Incident and alert investigation workflows
-- Security and investigation areas within the Defender portal
-
-### Why This Matters
-
-For a SOC analyst, effective use of Defender XDR is not simply about identifying an alert. It requires understanding how different security signals relate to each other and using that context to determine whether activity represents a genuine threat.
-
-This foundation provides the context for the attack simulations that follow, where I investigate how different attacker techniques appear within Defender telemetry and how those signals can support detection and investigation.
-
----
-## Simulation Methodology
-
-Each attack simulation will follow a defensive security validation approach:
-
-Simulated Attack Technique → Security Telemetry Generated → Microsoft Defender Detection → Alert Investigation → Evidence Collection → Security Improvement Recommendations
-
-
-The objective of each simulation is to understand:
-
-- What attacker activity looks like in an environment
-- What telemetry is generated during an attack
-- How security tools detect suspicious behaviour
-- How analysts investigate and respond to security events
-
----
-
-## Simulated Attack Scenarios
-
-### 1. Execution
-
-#### Scenario
-
-A controlled simulation was used to investigate a suspicious PowerShell execution event on a Windows 11 device. The activity demonstrated how attackers may use scripting and command-line tools to execute potentially malicious code.
-
-#### Detection & Investigation
-
-Microsoft Defender XDR generated a **medium-severity** alert for **"A script with suspicious content was observed"**.
+The process investigation identified `cmd.exe` activity involving `csc.exe`, which was used to compile a C# file associated with the simulation.
 
 ![Attack Activity](screenshots/execution-activity.png)
 
-I reviewed the affected device, user account, timestamp, alert details, process activity, and command-line information to understand what had occurred.
-
-The investigation identified suspicious behaviour involving `cmd.exe`. The command-line activity showed `csc.exe` being used to compile a C# file associated with the simulated attack. This provided additional context about how the suspicious code was executed on the device.
-
 ![Defender Investigation](screenshots/execution-investigation.png)
-
-I reviewed the available script and event information to understand the activity and assess whether the execution was consistent with malicious behaviour.
 
 ![Investigation Evidence](screenshots/execution-evidence.png)
 
-#### MITRE ATT&CK
+**MITRE ATT&CK:** T1059.003 – Windows Command Shell; T1218.014 – MMC.
 
-The activity was associated with:
+### 02. Credential Access
 
-- **T1059.003 – Windows Command Shell**
-- **T1218.014 – MMC**
+Investigated suspicious account and device activity initially associated with a potential password-spray scenario.
 
-These techniques fall within the MITRE ATT&CK framework and provide context for the observed execution activity.
+The investigation reviewed affected accounts, device activity, authentication evidence, and related alerts.
 
-#### Security Improvements
+Available Defender telemetry identified a compromised account and additional suspicious activity on the affected device. The initial password-spray hypothesis was not confirmed.
 
-- Monitor suspicious PowerShell and command-line execution.
-- Investigate scripts and executables running from unusual locations.
-- Use endpoint protection to detect and prevent malicious script execution.
-- Isolate affected devices when malicious execution is confirmed.
-- Use additional investigation and threat-hunting capabilities to identify related activity.
-
----
-
-### 2. Credential Access
-
-#### Scenario
-
-A controlled simulation was used to investigate a potential **password-spray attack** involving failed sign-in attempts and a suspicious login from an unfamiliar IP address.
-
-The objective was to determine whether credentials were being targeted and identify any evidence of account compromise.
-
-#### Detection & Investigation
-
-Microsoft Defender XDR generated alerts relating to suspicious activity on a potentially compromised device.
+Advanced Hunting was used to investigate additional activity associated with the device.
 
 ![Attack Activity](screenshots/credential-access-activity.png)
 
-I reviewed the affected device, associated accounts, alert timeline, and available authentication and process activity.
-
-The investigation did not confirm a password-spray attack. Instead, the available Defender telemetry identified a compromised account and additional suspicious activity associated with the affected device.
-
 ![Defender Investigation](screenshots/credential-access-investigation.png)
-
-I reviewed the available investigation evidence and used Advanced Hunting to search for additional activity associated with the affected device.
 
 ![Investigation Evidence](screenshots/credential-access-evidence.png)
 
 ![Advanced Hunting](screenshots/credential-access-hunting.png)
 
-The investigation therefore shifted from validating the initial password-spray hypothesis to assessing the evidence of account compromise and related attacker activity.
+**MITRE ATT&CK:** T1033 – System Owner/User Discovery; T1087 – Account Discovery; T1069 – Permission Groups Discovery.
 
-#### MITRE ATT&CK
+### 03. Privilege Escalation
 
-The investigation included activity associated with:
+Investigated a simulated User Account Control (UAC) bypass detected on a Windows 11 device.
 
-- **T1033 – System Owner/User Discovery**
-- **T1087 – Account Discovery**
-- **T1069 – Permission Groups Discovery**
-- **T1087.001 – Local Account**
-- **T1087.002 – Domain Account**
+Microsoft Defender XDR generated a medium-severity alert: **"UAC bypass was detected."**
 
-These techniques provided context for the observed activity associated with the compromised device.
+The investigation involved reviewing process activity, command-line information, registry modifications, and the process tree.
 
-#### Security Improvements
-
-- Monitor for suspicious authentication and account activity.
-- Investigate unusual PowerShell activity associated with compromised accounts.
-- Use Advanced Hunting to identify related activity across affected devices.
-- Isolate compromised devices when active attacker activity is confirmed.
-- Use automated investigation and response capabilities to contain and remediate threats.
-
----
-
-### 3. Privilege Escalation
-
-#### Scenario
-
-A controlled simulation was used to investigate a **User Account Control (UAC) bypass** detected on a Windows 11 device. UAC bypass techniques can allow an attacker to execute actions with elevated privileges while avoiding normal user approval prompts.
-
-#### Detection & Investigation
-
-Microsoft Defender XDR generated a **medium-severity** alert for **"UAC bypass was detected"**.
+The evidence provided context for the attempted privilege escalation and how the activity was executed.
 
 ![Attack Activity](screenshots/privilege-escalation-activity.png)
 
-I reviewed the affected device, user account, timestamp, process activity, and investigation timeline to understand what had occurred.
-
-The activity involved `cmd.exe` and `powershell.exe`. I reviewed the available evidence and suspicious entities before using the process tree to validate how the activity was executed.
-
 ![Defender Investigation](screenshots/privilege-escalation-investigation.png)
 
-The investigation identified registry modification activity associated with the simulated UAC bypass. The process tree and timeline provided additional context to validate the detection.
+**MITRE ATT&CK:** T1548.002 – Bypass User Account Control; T1112 – Modify Registry.
 
-#### MITRE ATT&CK
+### 04. Defence Evasion
 
-The activity was associated with:
+Investigated an attempt to modify Microsoft Defender Antivirus security settings.
 
-- **T1548.002 – Bypass User Account Control**
-- **T1112 – Modify Registry**
+Microsoft Defender XDR generated a high-severity alert relating to an attempt to turn off Defender Antivirus protection.
 
-These techniques fall within the MITRE ATT&CK framework and were used to provide context for the observed activity.
+The investigation identified PowerShell activity attempting to modify Defender configuration through registry changes.
 
-#### Security Improvements
-
-- Apply least-privilege principles to reduce the impact of compromised accounts.
-- Monitor for suspicious UAC bypass and registry modification activity.
-- Investigate unexpected PowerShell and command-line activity involving privilege changes.
-- Keep Microsoft Defender security protections enabled and monitor attempts to bypass them.
-
----
-
-### 4. Defence Evasion
-
-#### Scenario
-
-A controlled simulation was used to investigate an attempt to disable Microsoft Defender Antivirus protection. The activity represented a potential Defence Evasion technique because an attacker may attempt to weaken or disable security controls to avoid detection.
-
-#### Detection & Investigation
-
-Microsoft Defender XDR generated a **high-severity** alert for an attempt to turn off Microsoft Defender Antivirus protection.
+Process, command-line, device, and user information were reviewed to establish the nature of the activity.
 
 ![Defender Alert](screenshots/defence-evasion-alert.png)
 
-I reviewed the affected device, user account, timestamp, process activity, and command-line information to understand what had occurred.
-
 ![Defender Investigation](screenshots/defence-evasion-investigation.png)
 
-The investigation showed PowerShell activity attempting to modify the Defender Antivirus configuration through a registry change. The available telemetry provided information about the process responsible for the activity and the changes being attempted.
+![Registry Evidence](screenshots/defence-evasion-registry.png)
 
-![Investigation Evidence](screenshots/defence-evasion-registry.png)
+**MITRE ATT&CK:** T1562.001 – Impair Defenses: Disable or Modify Tools.
 
-The investigation confirmed that the activity was associated with an attempt to impair Defender protections and provided process, command-line, device, and user context for further investigation.
+### 05. Lateral Movement
 
-#### MITRE ATT&CK
+Investigated a hands-on-keyboard incident involving a compromised account.
 
-The activity was associated with:
+Microsoft Defender XDR generated a high-severity alert: **"Compromised account conducting hands-on-keyboard attack."**
 
-- **T1562.001 – Impair Defenses: Disable or Modify Tools**
-- **T1562.002 – Impair Defenses: Indicator Blocking**
+The investigation covered the incident timeline, affected device, process activity, related alerts, and suspicious PowerShell execution.
 
-These techniques fall within the Defence Evasion tactic and provide context for the observed activity.
+Defender also detected and prevented execution of a malicious PowerShell component.
 
-#### Security Improvements
-
-- Prevent unauthorised users from modifying Microsoft Defender Antivirus security settings.
-- Monitor for attempts to disable or weaken Defender protections.
-- Review PowerShell and registry activity associated with security-control changes.
-- Investigate and escalate high-severity alerts involving attempts to impair security controls.
-
----
-
-### 5. Lateral Movement
-
-#### Scenario
-
-A controlled simulation was used to investigate a **hands-on-keyboard attack involving a compromised account**. The activity demonstrated how an attacker may use a compromised identity to perform discovery and move through an environment.
-
-#### Detection & Investigation
-
-Microsoft Defender XDR generated a **high-severity** alert for **"Compromised account conducting hands-on-keyboard attack"**.
+Additional evidence revealed domain controller discovery and account-related discovery activity.
 
 ![Attack Activity](screenshots/lateral-movement-activity.png)
 
-I reviewed the incident timeline, affected device, alerts, assets, and process activity to understand how the attack unfolded.
-
-The investigation identified PowerShell activity involving domain controller discovery and additional suspicious command-line activity. Defender also detected and prevented execution of a malicious PowerShell component.
-
 ![Defender Investigation](screenshots/lateral-movement-investigation.png)
-
-I then reviewed the available evidence to correlate the alerts, processes, and files involved in the incident and confirm the suspicious activity.
 
 ![Investigation Evidence](screenshots/lateral-movement-evidence.png)
 
-The investigation provided visibility into the sequence of activity and showed how Defender XDR correlated suspicious processes, files, and account activity within the incident.
+**MITRE ATT&CK:** T1033 – System Owner/User Discovery; T1087 – Account Discovery; T1069 – Permission Groups Discovery.
 
-#### MITRE ATT&CK
+## Investigation Approach
 
-The activity was associated with:
+Across the five scenarios, investigations focused on:
 
-- **System Owner/User Discovery**
-- **Account Discovery**
-- **Permission Groups Discovery**
-- **Account Discovery: Local Account**
-- **Account Discovery: Domain Account**
+- Reviewing Defender alerts and incident severity.
+- Identifying affected devices and user accounts.
+- Analysing process trees and command-line activity.
+- Reviewing incident timelines and related security events.
+- Using Advanced Hunting to investigate additional activity.
+- Mapping observed behaviour to MITRE ATT&CK.
+- Identifying appropriate defensive improvements.
 
-These techniques fall within the MITRE ATT&CK framework and provide context for the observed discovery and lateral movement activity.
+## Outcome
 
-#### Security Improvements
+The simulations provided practical experience investigating attacker behaviour through Microsoft Defender XDR.
 
-- Monitor for abnormal PowerShell and command-line activity.
-- Investigate compromised accounts showing unusual discovery behaviour.
-- Apply least-privilege access to limit the impact of compromised identities.
-- Monitor account and permission discovery activity across the environment.
+They demonstrated how endpoint telemetry, process activity, incident correlation, and Advanced Hunting can support the identification and investigation of suspicious activity.
 
----
-
-## Investigation Workflow
-
-The simulations followed a consistent defensive investigation workflow:
-
-**Attack Activity → Defender Detection → Alert Triage → Evidence Review → Investigation → Validation → Security Improvements**
-
-For each scenario, I reviewed:
-
-- Affected users and devices
-- Alert severity and detection details
-- Process and command-line activity
-- Incident timelines and related alerts
-- Available investigation evidence
-- Relevant MITRE ATT&CK techniques
-- Additional telemetry where available through Advanced Hunting
-
-The objective was to validate the detection, understand the observed activity, and determine appropriate defensive actions.
-
----
-
-## Security Improvements
-
-The simulations highlighted several areas that can strengthen security controls and detection capabilities:
-
-- Apply least-privilege access to limit the impact of compromised accounts.
-- Monitor suspicious PowerShell, command-line, and registry activity.
-- Strengthen controls around privileged access and UAC bypass attempts.
-- Monitor authentication and account discovery activity for signs of compromise.
-- Maintain and monitor endpoint protection to prevent attempts to impair security controls.
-- Use Microsoft Defender investigation and Advanced Hunting capabilities to identify related activity.
-- Isolate affected devices when active malicious activity is confirmed.
-- Regularly review security detections and response processes to improve visibility and reduce attacker dwell time.
-
----
-
-## Key Learnings
-
-This project strengthened my understanding of how Microsoft Defender XDR can be used from a defensive security perspective.
-
-Key areas developed through the simulations included:
-
-- Investigating security alerts and incidents using Defender XDR
-- Analysing process, command-line, device, and user activity
-- Understanding how attacker techniques generate security telemetry
-- Using MITRE ATT&CK to provide context to observed activity
-- Using Advanced Hunting to investigate related events
-- Validating detections using available evidence rather than relying solely on alert descriptions
-- Identifying security improvements based on observed attacker behaviour
-
-The simulations reinforced the importance of correlating multiple sources of evidence when investigating an incident and distinguishing between the **initial alert hypothesis and what the available evidence actually demonstrates**.
+A key focus throughout the project was validating alert findings against available evidence rather than relying solely on the initial detection description.
