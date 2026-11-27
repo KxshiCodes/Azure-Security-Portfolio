@@ -1,240 +1,84 @@
 # Network Security
 
-## Overview
+Implemented a layered network security environment in Azure, using network segmentation, traffic filtering, and centralised firewall controls to restrict access to cloud workloads.
 
-This project demonstrates how Azure network security controls can be implemented to protect cloud workloads, restrict unauthorised access, and control traffic flow.
-
-The objective was to design a layered network security approach using Azure networking services including Virtual Networks, Network Security Groups (NSGs), Application Security Groups (ASGs), and Azure Firewall.
-
-The security controls implemented in this project help:
-
-- Reduce attack surface
-- Control network access
-- Limit unnecessary communication between resources
-- Restrict lateral movement opportunities
-- Improve visibility and control over network traffic
-
----
-
-# Scenario
-
-A company hosts multiple workloads within an Azure environment and requires network security controls to protect resources from unauthorised access.
-
-The objective was to implement a defence-in-depth network security model where traffic is controlled at multiple layers:
-
-Internet → Azure Firewall (Centralised traffic filtering) → Network Security Groups (Network access control) → Application Security Groups (Workload-based grouping) → Azure Resources (Virtual Machines)
-
----
-
-# Objectives
-
-This project focuses on:
-
-- Designing a secure Azure network foundation
-- Implementing network segmentation
-- Controlling inbound and outbound traffic
-- Applying least privilege network access
-- Configuring Azure Firewall traffic inspection
-- Validating network security controls
-
----
-
-# Architecture
+## Architecture
 
 ![Network Security Architecture](screenshots/network-architecture.png)
 
-The environment uses multiple Azure security controls to provide layered protection:
+The environment combines Azure Virtual Networks, subnets, Network Security Groups, Application Security Groups, Azure Firewall, and route tables to control network access and traffic flow.
 
-| Security Control | Purpose |
-|---|---|
-| Virtual Network | Provides isolated Azure networking |
-| Subnets | Organise and separate workloads |
-| Application Security Groups | Group resources based on function |
-| Network Security Groups | Control allowed network traffic |
-| Azure Firewall | Centralised traffic filtering and inspection |
-| Route Tables | Control traffic flow through security appliances |
+## Implementation
 
----
+### 01. Virtual Network & Subnet Configuration
 
-# Implementation
-
-## 1. Virtual Network and Network Segmentation
-
-A Virtual Network was created to provide an isolated network boundary for Azure resources.
+Created the Azure Virtual Network and subnets to organise workloads and establish network boundaries.
 
 ![Virtual Network](screenshots/vnet.png)
 
-The network design provides the foundation for applying security controls and controlling communication between workloads.
+### 02. Application Security Groups
 
----
-
-# 2. Application Security Groups (ASGs)
-
-Application Security Groups were created to logically group workloads based on their function.
+Created Application Security Groups (ASGs) to logically group workloads based on their function, allowing security rules to reference application roles rather than individual IP addresses.
 
 ![Application Security Groups](screenshots/appsec-groups.png)
 
-ASGs allow security rules to be applied based on workload roles rather than individual IP addresses.
+### 03. Network Security Groups
 
-Example:
+Configured Network Security Groups (NSGs) and associated them with the relevant network resources.
 
-- Web servers
-- Management servers
-- Internal workloads
-
-This improves scalability and simplifies security management.
-
----
-
-# 3. Network Security Groups (NSGs)
-
-Network Security Groups were implemented to control inbound and outbound traffic at the subnet level.
+Rules were created to control inbound and outbound traffic, restrict management access, and allow required communication.
 
 ![Network Security Groups](screenshots/netsec-group.png)
 
 ![NSG Association](screenshots/associate-group.png)
 
-NSG rules were created to allow only required communication paths.
-
-Example controls:
-
-- Allow web traffic to public-facing workloads
-- Restrict management access
-- Block unnecessary network communication
-
 ![NSG Rules](screenshots/rules-based.png)
 
----
+### 04. Azure Firewall
 
-# 4. Azure Firewall Deployment
-
-Azure Firewall was deployed to provide centralised traffic filtering and control.
+Deployed Azure Firewall as a centralised traffic filtering control for the environment.
 
 ![Azure Firewall](screenshots/firewall.png)
 
-Azure Firewall provides:
+### 05. Routing & Firewall Policies
 
-- Application filtering
-- Network traffic filtering
-- Centralised security policy management
-- Controlled internet access
+Configured route tables to direct selected traffic through Azure Firewall.
 
----
-
-# 5. Traffic Routing and Firewall Rules
-
-Route tables were configured to direct traffic through Azure Firewall for inspection.
+Created application and network rules to control outbound access based on destination domains, IP addresses, ports, and protocols.
 
 ![Default Route](screenshots/droute.png)
 
-Firewall policies were created using:
-
-## Application Rules
-
-Application rules control access based on fully qualified domain names (FQDNs).
-
 ![Application Rules](screenshots/app-rule.png)
-
-
-## Network Rules
-
-Network rules control traffic using:
-
-- Source addresses
-- Destination addresses
-- Ports
-- Protocols
 
 ![Network Rules](screenshots/net-rule.png)
 
+DNS settings were also configured to support domain resolution within the environment.
 
-## DNS Configuration
+![DNS Configuration](screenshots/dservers.png)
 
-DNS settings were configured to support domain resolution and firewall policy enforcement.
+## Validation
 
-![DNS Servers](screenshots/dservers.png)
+Tested the network security configuration to verify that access controls and firewall policies behaved as expected.
 
----
+**Management Access**
 
-# Validation
-
-The network security controls were tested to confirm that traffic restrictions were working as expected.
-
-Validation included:
-
-## Management Access Testing
-
-Connected to the management virtual machine using Remote Desktop.
+Established an RDP connection to the management virtual machine.
 
 ![RDP Validation](screenshots/VMMgmt.png)
 
+**Firewall Policy Testing**
 
-## Firewall Policy Testing
+Tested outbound connectivity from the internal workload.
 
-Tested outbound access from the internal workload.
-
-Expected results:
-
-- Allowed websites successfully loaded
-- Restricted websites were blocked by firewall policy
+- Permitted destinations were accessible.
+- Restricted destinations were blocked by firewall policy.
 
 ![Firewall Validation](screenshots/test-valid.png)
 
-![Firewall Validation 2](screenshots/test-valid1.png)
+![Firewall Validation](screenshots/test-valid1.png)
 
-![Firewall Validation 3](screenshots/test-valid2.png)
+## Outcome
 
-![Firewall Validation 4](screenshots/test-valid3.png)
+Established a segmented Azure network with NSG-based access controls, workload grouping, and centralised firewall filtering.
 
-![Firewall Validation 5](screenshots/test-valid4.png)
-
----
-
-# Architecture Decisions
-
-## Layered Network Security
-
-Multiple security controls were implemented rather than relying on a single defence mechanism.
-
-This provides defence in depth by combining:
-
-- Network segmentation
-- Access filtering
-- Traffic inspection
-- Controlled routing
-
----
-
-## Least Privilege Networking
-
-Only required traffic was allowed between resources.
-
-Restricting unnecessary access reduces:
-
-- Attack surface
-- Exposure of services
-- Potential lateral movement paths
-
----
-
-## Centralised Traffic Inspection
-
-Azure Firewall was implemented as a central security control point for monitoring and controlling network traffic.
-
-This provides greater visibility and consistency compared to managing individual workload rules.
-
----
-
-# Key Learnings
-
-Through this project, I developed practical experience with:
-
-- Azure networking fundamentals
-- Virtual Network design
-- Network Security Groups
-- Application Security Groups
-- Azure Firewall configuration
-- Traffic routing and filtering
-- Network security best practices
-
-This project demonstrated how layered network security controls can protect Azure workloads by controlling communication paths and reducing unnecessary exposure.
+Validated management connectivity and outbound traffic restrictions, demonstrating how network security controls can be combined to limit workload exposure and control communication within a cloud environment.
