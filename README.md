@@ -1,72 +1,64 @@
 # Azure Security Portfolio
 
-A hands-on Azure security portfolio covering cloud infrastructure, identity and access management, network security, threat detection, and incident response.
+Hands-on security projects focused on securing, monitoring, and investigating Microsoft Azure environments.
 
-Practical implementations using Microsoft Azure security services, with a focus on securing resources, analysing security events, detecting threats, and investigating incidents.
+This portfolio documents practical work across cloud security, identity and access management, network security, threat detection, attack simulation, and incident response.
 
 ## Projects
 
-### 1. Azure Foundation
+### 01. Azure Foundation
+Deployment of the Azure environment and core security infrastructure.
 
-Deployment and configuration of the core Azure environment.
-
-- Azure resource configuration
+- Resource configuration
 - Log Analytics Workspace
 - Microsoft Sentinel deployment
-- Security telemetry collection
-- KQL queries and validation
+- Security log collection and validation
+- KQL queries
 
-### 2. Identity Security
-
-Identity and access management using Microsoft Entra ID.
+### 02. Identity Security
+Securing identities, access, and authentication in Microsoft Entra ID.
 
 - Role-Based Access Control (RBAC)
 - Least-privilege access
-- Multi-factor authentication (MFA)
+- Multi-Factor Authentication (MFA)
 - Conditional Access
 - Identity Protection
 - Privileged access management
-- Zero Trust principles
 
-### 3. Network Security
+### 03. Network Security
+Implementing network security controls within Azure.
 
-Configuration of Azure network security controls.
-
-- Network segmentation
 - Network Security Groups (NSGs)
+- Network segmentation
 - Azure Firewall
-- Secure connectivity
+- Secure network connectivity
 
-### 4. Security Monitoring & Threat Detection
-
-Security monitoring, log analysis, and threat detection.
+### 04. Security Monitoring & Threat Detection
+Monitoring security activity and identifying potential threats.
 
 - Microsoft Sentinel
 - Microsoft Defender
-- Security alerts
+- Security alert investigation
 - Log analysis
-- Detection engineering
-- KQL queries
+- KQL-based detection
 
-### 5. Attack Simulation
-
-Controlled attack scenarios to understand attacker behaviour and validate security controls.
+### 05. Attack Simulation
+Controlled attack simulations to assess security controls and investigate attacker activity.
 
 - Credential access
-- Execution techniques
+- Execution
 - Privilege escalation
 - Defence evasion
 - Lateral movement
 
-### 6. Incident Response
-
-Security incident investigation following a SOC workflow.
+### 06. Incident Response
+Investigating security incidents, assessing impact, and documenting findings.
 
 - Alert triage
 - Incident investigation
 - Indicator of Compromise (IOC) analysis
-- Incident documentation
-- Response recommendations
+- Identity activity investigation
+- Incident reporting
 
 ## Technologies
 
