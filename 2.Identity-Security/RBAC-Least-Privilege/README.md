@@ -51,16 +51,6 @@ Permissions are assigned to groups rather than individual users, improving secur
 
 ---
 
-# Technologies Used
-
-- Microsoft Entra ID
-- Azure Role-Based Access Control (RBAC)
-- Azure Portal
-- Azure PowerShell
-- Azure CLI
-
----
-
 # Implementation
 
 ## 1. Microsoft Entra ID Security Groups
