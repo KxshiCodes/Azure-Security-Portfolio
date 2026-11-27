@@ -1,136 +1,61 @@
 # Azure Foundation
 
-## Overview
+Built the foundational Azure environment used throughout this portfolio, establishing the infrastructure for centralised logging, security monitoring, and incident investigation.
 
-This project establishes the foundational Azure environment used throughout this security portfolio.
-
-The objective was to build the core cloud infrastructure required for security monitoring, threat detection, and incident investigation using Microsoft security technologies.
-
-The environment provides the foundation for:
-
-- Centralised security logging
-- Cloud security monitoring
-- Endpoint telemetry collection
-- Threat detection
-- Incident response investigations
-- Future attack simulation scenarios
-
----
-
-# Objectives
-
-This project focuses on:
-
-- Understanding Azure resource organisation
-- Configuring foundational Azure security resources
-- Deploying Log Analytics for centralised telemetry collection
-- Enabling Microsoft Sentinel for SIEM capabilities
-- Connecting Azure and Windows security data sources
-- Configuring security auditing and logging
-- Validating collected telemetry using KQL queries
-
----
-
-# Architecture
+## Architecture
 
 ![Azure Foundation Architecture](screenshots/architecture-diagram.jpg)
 
-The environment consists of:
+The environment includes Azure resources, a Log Analytics Workspace, Microsoft Sentinel, and a Windows virtual machine providing endpoint security telemetry.
 
-- Azure resources used as monitored workloads
-- Log Analytics Workspace for log collection
-- Microsoft Sentinel for security monitoring and investigation
-- Windows security logging for endpoint telemetry
+## Implementation
 
----
+### 01. Azure Infrastructure
 
-# Implementation
-
-## 1. Azure Resource Configuration
-
-Core Azure resources were created to provide the foundation for security monitoring activities.
+Created the Azure resource group and deployed the core resources required for the security environment.
 
 ![Resource Group](screenshots/01-resource-group.png)
 
-Resource Groups provide logical organisation and management of related Azure resources.
+### 02. Log Analytics Workspace
 
----
-
-## 2. Log Analytics Workspace
-
-A Log Analytics Workspace was deployed to collect and analyse security telemetry from connected Azure resources.
+Deployed a Log Analytics Workspace to centralise security telemetry and provide a foundation for log analysis using KQL.
 
 ![Log Analytics](screenshots/02-log-analytics.png)
 
-The workspace acts as the central location where logs are stored and queried using KQL.
+### 03. Microsoft Sentinel
 
-It provides the data foundation required for Microsoft Sentinel monitoring and investigation.
-
----
-
-## 3. Microsoft Sentinel Deployment
-
-Microsoft Sentinel was enabled to provide SIEM capabilities including security monitoring, investigation, and threat detection.
+Enabled Microsoft Sentinel and connected it to the Log Analytics Workspace for security monitoring and incident investigation.
 
 ![Sentinel Enabled](screenshots/03-sentinel-enabled.png)
 
-Sentinel uses collected telemetry to identify suspicious activity, generate alerts, and support incident investigation workflows.
+### 04. Security Data Connectors
 
----
-
-## 4. Security Data Connectors
-
-Data connectors were configured to ingest security telemetry from Azure and Windows sources.
+Configured data connectors to ingest security telemetry from available Azure and Windows sources.
 
 ![Data Connectors](screenshots/04-data-connectors.png)
 
-These connectors allow Microsoft Sentinel to receive security events from connected services and make them available for analysis.
+### 05. Virtual Machine Monitoring
 
----
-
-## 5. Virtual Machine Telemetry
-
-The Azure Virtual Machine was connected to monitoring services to verify that security events were being collected.
+Connected an Azure Windows virtual machine to the monitoring environment to provide endpoint security telemetry.
 
 ![VM Telemetry](screenshots/05-vm-telemetry.png)
 
-This provided an endpoint source for generating and investigating security events.
+### 06. Windows Security Auditing
 
----
-
-## 6. Windows Security Logging
-
-Windows auditing policies were enabled to generate security events for monitoring and investigation.
+Enabled Windows auditing policies to generate security events covering authentication and system activity.
 
 ![Windows Auditing](screenshots/06-windows-auditing.png)
 
-Security logs provide visibility into authentication activity, system changes, and potential suspicious behaviour.
+### 07. KQL Validation
 
----
-
-## 7. KQL Log Validation
-
-KQL queries were used to verify that security telemetry was successfully ingested into the Log Analytics Workspace.
+Used KQL queries to verify log ingestion and inspect available security events within the Log Analytics Workspace.
 
 ![KQL Validation](screenshots/07-kql-query.png)
 
-Example validation checks included:
+## Outcome
 
-- Confirming log ingestion
-- Reviewing security events
-- Verifying available telemetry sources
+Established a working Azure security environment with centralised log collection, Microsoft Sentinel integration, and Windows security telemetry.
 
----
+Validated that security events were being ingested and could be queried for subsequent monitoring and investigation activities.
 
-# Key Learnings
-
-Through this project, I developed practical experience with:
-
-- Building a foundational Azure security environment
-- Understanding how Azure resources support security operations
-- Deploying Microsoft Sentinel and Log Analytics
-- Connecting security telemetry sources
-- Configuring Windows security logging
-- Using KQL to validate and analyse security data
-
-This foundation supports the later portfolio sections covering identity security, network security, threat detection, attack simulation, and incident response.
+This environment serves as the foundation for the remaining security projects in this portfolio.
